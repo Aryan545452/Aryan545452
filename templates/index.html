@@ -13,83 +13,125 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #101218;
-            color: white;
+            min-height: 100vh;
+            font-family: Arial, Tahoma, sans-serif;
+            background:
+                radial-gradient(circle at top, #26324a 0%, #111522 38%, #090c13 100%);
+            color: #fff;
         }
 
-        header {
+        .top {
             text-align: center;
-            padding: 25px 10px;
+            padding: 35px 15px 25px;
         }
 
-        header h1 {
+        .brand {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 30px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.1);
+            color: #aeb9d2;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            margin: 15px 0 7px;
+            font-size: 38px;
+        }
+
+        .subtitle {
             margin: 0;
-            font-size: 32px;
+            color: #9da7bb;
+            font-size: 15px;
         }
 
-        header p {
-            margin-top: 8px;
-            color: #aaa;
-            font-size: 16px;
-        }
-
-        .container {
-            width: 95%;
-            max-width: 1100px;
+        .panel {
+            width: 94%;
+            max-width: 1250px;
             margin: auto;
+            padding-bottom: 40px;
         }
 
         .robots {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 22px;
         }
 
-        .robot {
-            background: #191c24;
-            border-radius: 18px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        .robot-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(24,29,42,.88);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 24px;
+            padding: 23px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.28);
+            backdrop-filter: blur(12px);
         }
 
-        .robot h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
+        .robot-card::before {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(85,140,255,.12);
+            top: -70px;
+            left: -50px;
         }
 
-        .status {
-            color: #5cff8d;
-            font-size: 14px;
-            margin-bottom: 15px;
+        .robot-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
 
-        .controls {
-            display: grid;
-            grid-template-columns: 70px 70px 70px;
-            grid-template-rows: 60px 60px 60px;
-            justify-content: center;
-            gap: 8px;
+        .robot-name {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .online {
+            font-size: 12px;
+            padding: 7px 11px;
+            border-radius: 20px;
+            background: rgba(49,210,120,.12);
+            color: #55e69a;
+            border: 1px solid rgba(49,210,120,.2);
+        }
+
+        .controller {
             direction: ltr;
+            display: grid;
+            grid-template-columns: 78px 78px 78px;
+            grid-template-rows: 65px 65px 65px;
+            gap: 9px;
+            justify-content: center;
         }
 
-        button {
-            border: none;
-            border-radius: 14px;
-            background: #292e39;
+        .btn {
+            border: 0;
+            border-radius: 17px;
+            background: #252c3c;
             color: white;
-            font-size: 25px;
+            font-size: 29px;
             cursor: pointer;
-            transition: 0.12s;
+            box-shadow:
+                inset 0 1px rgba(255,255,255,.06),
+                0 7px 16px rgba(0,0,0,.2);
+            transition: .12s;
         }
 
-        button:hover {
-            background: #383f4d;
+        .btn:hover {
+            background: #313a4e;
+            transform: translateY(-2px);
         }
 
-        button:active {
-            transform: scale(0.94);
+        .btn:active {
+            transform: scale(.93);
         }
 
         .up {
@@ -105,9 +147,13 @@
         .stop {
             grid-column: 2;
             grid-row: 2;
-            background: #9b2525;
-            font-size: 15px;
+            background: #a52d38;
+            font-size: 14px;
             font-weight: bold;
+        }
+
+        .stop:hover {
+            background: #c13845;
         }
 
         .right {
@@ -121,47 +167,76 @@
         }
 
         .values {
-            margin-top: 18px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
             direction: ltr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .value {
-            background: #111319;
-            padding: 10px 15px;
-            border-radius: 10px;
-            min-width: 90px;
+        .value-box {
+            background: #10141e;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
         }
 
-        .value span {
+        .value-title {
             display: block;
-            color: #999;
-            font-size: 12px;
-            margin-bottom: 4px;
+            color: #7f899e;
+            font-size: 11px;
+            margin-bottom: 5px;
         }
 
-        .value strong {
-            font-size: 20px;
-        }
-
-        .stop-all {
-            display: block;
-            margin: 30px auto;
-            padding: 15px 35px;
-            background: #b52222;
-            font-size: 17px;
+        .value-number {
+            font-size: 22px;
             font-weight: bold;
         }
 
-        @media (max-width: 800px) {
+        .global-stop {
+            display: block;
+            width: min(400px, 100%);
+            margin: 28px auto 0;
+            padding: 17px;
+            border: 0;
+            border-radius: 17px;
+            background: linear-gradient(135deg, #b52c38, #7d2029);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(0,0,0,.3);
+            transition: .15s;
+        }
+
+        .global-stop:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            color: #626b7d;
+            font-size: 12px;
+            padding: 5px 0 25px;
+        }
+
+        @media (max-width: 900px) {
             .robots {
                 grid-template-columns: 1fr;
+                max-width: 520px;
+                margin: auto;
             }
 
-            header h1 {
-                font-size: 26px;
+            h1 {
+                font-size: 31px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .controller {
+                grid-template-columns: 68px 68px 68px;
+                grid-template-rows: 60px 60px 60px;
             }
         }
     </style>
@@ -169,57 +244,278 @@
 
 <body>
 
-<header>
-    <h1>روبات کنترل</h1>
-    <p>RCJ Soccer Cheat</p>
-</header>
+<div class="top">
+    <div class="brand">RCJ SOCCER CHEAT</div>
 
-<div class="container">
+    <h1>روبات کنترل</h1>
+
+    <p class="subtitle">
+        کنترل آنلاین ربات‌های RCJ Soccer
+    </p>
+</div>
+
+<div class="panel">
 
     <div class="robots">
 
         <!-- ROBOT 1 -->
-        <div class="robot">
-            <h2>Robot 1</h2>
-            <div class="status">● Online</div>
+        <div class="robot-card">
 
-            <div class="controls">
-                <button class="up" onclick="sendCommand(1, 10, 10)">↑</button>
+            <div class="robot-head">
+                <div class="robot-name">🤖 Robot 1</div>
+                <div class="online">● Online</div>
+            </div>
 
-                <button class="left" onclick="sendCommand(1, -10, 10)">←</button>
+            <div class="controller">
 
-                <button class="stop" onclick="sendCommand(1, 0, 0)">
+                <button class="btn up"
+                    onclick="sendCommand(1, 10, 10)">
+                    ↑
+                </button>
+
+                <button class="btn left"
+                    onclick="sendCommand(1, -10, 10)">
+                    ←
+                </button>
+
+                <button class="btn stop"
+                    onclick="sendCommand(1, 0, 0)">
                     STOP
                 </button>
 
-                <button class="right" onclick="sendCommand(1, 10, -10)">→</button>
+                <button class="btn right"
+                    onclick="sendCommand(1, 10, -10)">
+                    →
+                </button>
 
-                <button class="down" onclick="sendCommand(1, -10, -10)">↓</button>
+                <button class="btn down"
+                    onclick="sendCommand(1, -10, -10)">
+                    ↓
+                </button>
+
             </div>
 
             <div class="values">
-                <div class="value">
-                    <span>LEFT</span>
-                    <strong id="left1">0</strong>
+                <div class="value-box">
+                    <span class="value-title">LEFT MOTOR</span>
+                    <span class="value-number" id="left1">0</span>
                 </div>
 
-                <div class="value">
-                    <span>RIGHT</span>
-                    <strong id="right1">0</strong>
+                <div class="value-box">
+                    <span class="value-title">RIGHT MOTOR</span>
+                    <span class="value-number" id="right1">0</span>
                 </div>
             </div>
+
         </div>
 
 
         <!-- ROBOT 2 -->
-        <div class="robot">
-            <h2>Robot 2</h2>
-            <div class="status">● Online</div>
+        <div class="robot-card">
 
-            <div class="controls">
-                <button class="up" onclick="sendCommand(2, 10, 10)">↑</button>
+            <div class="robot-head">
+                <div class="robot-name">🤖 Robot 2</div>
+                <div class="online">● Online</div>
+            </div>
 
-                <button class="left" onclick="sendCommand(2, -10, 10)">←</button>
+            <div class="controller">
 
-                <button class="stop" onclick="sendCommand(2, 0, 0)">
+                <button class="btn up"
+                    onclick="sendCommand(2, 10, 10)">
+                    ↑
+                </button>
+
+                <button class="btn left"
+                    onclick="sendCommand(2, -10, 10)">
+                    ←
+                </button>
+
+                <button class="btn stop"
+                    onclick="sendCommand(2, 0, 0)">
                     STOP
+                </button>
+
+                <button class="btn right"
+                    onclick="sendCommand(2, 10, -10)">
+                    →
+                </button>
+
+                <button class="btn down"
+                    onclick="sendCommand(2, -10, -10)">
+                    ↓
+                </button>
+
+            </div>
+
+            <div class="values">
+                <div class="value-box">
+                    <span class="value-title">LEFT MOTOR</span>
+                    <span class="value-number" id="left2">0</span>
+                </div>
+
+                <div class="value-box">
+                    <span class="value-title">RIGHT MOTOR</span>
+                    <span class="value-number" id="right2">0</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ROBOT 3 -->
+        <div class="robot-card">
+
+            <div class="robot-head">
+                <div class="robot-name">🤖 Robot 3</div>
+                <div class="online">● Online</div>
+            </div>
+
+            <div class="controller">
+
+                <button class="btn up"
+                    onclick="sendCommand(3, 10, 10)">
+                    ↑
+                </button>
+
+                <button class="btn left"
+                    onclick="sendCommand(3, -10, 10)">
+                    ←
+                </button>
+
+                <button class="btn stop"
+                    onclick="sendCommand(3, 0, 0)">
+                    STOP
+                </button>
+
+                <button class="btn right"
+                    onclick="sendCommand(3, 10, -10)">
+                    →
+                </button>
+
+                <button class="btn down"
+                    onclick="sendCommand(3, -10, -10)">
+                    ↓
+                </button>
+
+            </div>
+
+            <div class="values">
+                <div class="value-box">
+                    <span class="value-title">LEFT MOTOR</span>
+                    <span class="value-number" id="left3">0</span>
+                </div>
+
+                <div class="value-box">
+                    <span class="value-title">RIGHT MOTOR</span>
+                    <span class="value-number" id="right3">0</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button class="global-stop" onclick="stopAll()">
+        ⛔ توقف همه ربات‌ها
+    </button>
+
+</div>
+
+<div class="footer">
+    RCJ Soccer Cheat • Robot Control Panel
+</div>
+
+
+<script>
+
+async function sendCommand(robotId, left, right) {
+
+    try {
+
+        const response = await fetch(
+            `/api/command/${robotId}`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    left: left,
+                    right: right
+                })
+            }
+        );
+
+        if (!response.ok) {
+            console.log(
+                "Server error:",
+                response.status
+            );
+            return;
+        }
+
+        updateValues(robotId, left, right);
+
+    } catch (error) {
+
+        console.log(
+            "Connection error:",
+            error
+        );
+
+    }
+}
+
+
+function updateValues(robotId, left, right) {
+
+    document.getElementById(
+        "left" + robotId
+    ).textContent = left;
+
+    document.getElementById(
+        "right" + robotId
+    ).textContent = right;
+}
+
+
+async function stopAll() {
+
+    try {
+
+        const response = await fetch(
+            "/api/stop",
+            {
+                method: "POST"
+            }
+        );
+
+        if (!response.ok) {
+            console.log(
+                "Stop error:",
+                response.status
+            );
+            return;
+        }
+
+        for (let i = 1; i <= 3; i++) {
+            updateValues(i, 0, 0);
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Connection error:",
+            error
+        );
+
+    }
+}
+
+</script>
+
+</body>
+</html>
