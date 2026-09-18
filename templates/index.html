@@ -1,1 +1,225 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>rcj soccer Cheat • Robot Control</title><link rel="stylesheet" href="/static/style.css"></head><body><header><div class="brand"><div class="logo">L5</div><div><b>rcj soccer Cheat</b><span>ROBOT CONTROL</span></div></div><div class="status"><i></i><span id="serverText">در حال بررسی...</span></div></header><main><section class="hero"><div><p>MANUAL CONTROL PANEL</p><h1>مرکز کنترل <strong>ربات‌ها</strong></h1><small>کنترل دستی سه ربات در یک پنل مدرن</small></div><button id="stopAll" class="stop">■ توقف همه</button></section><section class="robots"><article class="card" data-robot="1"><div class="top"><div><label>ROBOT 01</label><h2>ربات 1</h2></div><span>● ONLINE</span></div><div class="pad"><button data-action="forward">▲</button><button data-action="left">◀</button><button class="center" data-action="stop">●</button><button data-action="right">▶</button><button data-action="back">▼</button></div><div class="motors"><div>LEFT<b class="left">0</b></div><div>RIGHT<b class="right">0</b></div></div></article><article class="card" data-robot="2"><div class="top"><div><label>ROBOT 02</label><h2>ربات 2</h2></div><span>● ONLINE</span></div><div class="pad"><button data-action="forward">▲</button><button data-action="left">◀</button><button class="center" data-action="stop">●</button><button data-action="right">▶</button><button data-action="back">▼</button></div><div class="motors"><div>LEFT<b class="left">0</b></div><div>RIGHT<b class="right">0</b></div></div></article><article class="card" data-robot="3"><div class="top"><div><label>ROBOT 03</label><h2>ربات 3</h2></div><span>● ONLINE</span></div><div class="pad"><button data-action="forward">▲</button><button data-action="left">◀</button><button class="center" data-action="stop">●</button><button data-action="right">▶</button><button data-action="back">▼</button></div><div class="motors"><div>LEFT<b class="left">0</b></div><div>RIGHT<b class="right">0</b></div></div></article></section><footer>LOTUS 5 <span>SERVER <b id="latency">--</b> ms</span></footer></main><script src="/static/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RCJ Soccer Cheat</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #101218;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .robots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .robot {
+            background: #191c24;
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .robot h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            color: #5cff8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 70px 70px 70px;
+            grid-template-rows: 60px 60px 60px;
+            justify-content: center;
+            gap: 8px;
+            direction: ltr;
+        }
+
+        button {
+            border: none;
+            border-radius: 14px;
+            background: #292e39;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            transition: 0.12s;
+        }
+
+        button:hover {
+            background: #383f4d;
+        }
+
+        button:active {
+            transform: scale(0.94);
+        }
+
+        .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .stop {
+            grid-column: 2;
+            grid-row: 2;
+            background: #9b2525;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .down {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        .values {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            direction: ltr;
+        }
+
+        .value {
+            background: #111319;
+            padding: 10px 15px;
+            border-radius: 10px;
+            min-width: 90px;
+        }
+
+        .value span {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .value strong {
+            font-size: 20px;
+        }
+
+        .stop-all {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 35px;
+            background: #b52222;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+            .robots {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>روبات کنترل</h1>
+    <p>RCJ Soccer Cheat</p>
+</header>
+
+<div class="container">
+
+    <div class="robots">
+
+        <!-- ROBOT 1 -->
+        <div class="robot">
+            <h2>Robot 1</h2>
+            <div class="status">● Online</div>
+
+            <div class="controls">
+                <button class="up" onclick="sendCommand(1, 10, 10)">↑</button>
+
+                <button class="left" onclick="sendCommand(1, -10, 10)">←</button>
+
+                <button class="stop" onclick="sendCommand(1, 0, 0)">
+                    STOP
+                </button>
+
+                <button class="right" onclick="sendCommand(1, 10, -10)">→</button>
+
+                <button class="down" onclick="sendCommand(1, -10, -10)">↓</button>
+            </div>
+
+            <div class="values">
+                <div class="value">
+                    <span>LEFT</span>
+                    <strong id="left1">0</strong>
+                </div>
+
+                <div class="value">
+                    <span>RIGHT</span>
+                    <strong id="right1">0</strong>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ROBOT 2 -->
+        <div class="robot">
+            <h2>Robot 2</h2>
+            <div class="status">● Online</div>
+
+            <div class="controls">
+                <button class="up" onclick="sendCommand(2, 10, 10)">↑</button>
+
+                <button class="left" onclick="sendCommand(2, -10, 10)">←</button>
+
+                <button class="stop" onclick="sendCommand(2, 0, 0)">
+                    STOP
